@@ -34,7 +34,10 @@ const Dashboard = () => {
         <Form.Group widths='equal'>
           <Form.Input fluid label='Nome' placeholder='Nome' />
           <Form.Input fluid label='Email' placeholder='Email' />
-          <Form.Input fluid label='CEP' placeholder='CEP' />
+          <Form.Input fluid label='CEP' placeholder='CEP' onBlur={(ev) => onBlurCEP(ev)} />
+          <Form.Input fluid label='Cidade' placeholder='Cidade' />
+          <Form.Input fluid label='Estado' placeholder='Estado' />
+          <Form.Input fluid label='Email' placeholder='Email' />
         </Form.Group>
       </Form>
     </Modal.Content>
@@ -53,6 +56,21 @@ const Dashboard = () => {
     console.log(data_aluno)
     setCurrentInfo(data_aluno)
     setModalInfos(true)
+  }
+
+  function onBlurCEP(ev){
+    const { value } = ev.target;
+
+    const cep = value?.replace(/[^0-9]/, '');
+
+    if(cep?.length !== 8){
+      return;
+    }
+
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+      
   }
 
   function render_actions(data_aluno){
