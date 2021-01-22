@@ -11,15 +11,19 @@ class AlunoController {
   }
 
   async create(req, res) {
-    // TODO
+    const {cep, cidade, email, estado, id, nome } = req.body;
+    const alunos = await Aluno.create({cep, cidade, email, estado, id, nome });
+    res.json(alunos);
   }
 
   async update(req, res) {
-    // TODO
+    const alunos = await Aluno.update()
+    res.json(alunos);
   }
 
   async delete(req, res) {
-    // TODO
+    const alunos = await Aluno.delete()
+    res.json(alunos);
   }
 }
 
